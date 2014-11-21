@@ -64,5 +64,33 @@ class CampusWave{
 		$qualifications = $this -> getResult($sql);
 		return $qualifications;
 	}
+
+	public function getRoles($type = 1){
+		$designations = array();
+		$sql = "select * from roles where type = $type and status = 1";
+		$designations = $this -> getResult($sql);
+		return $designations;
+	}
+
+	public function getCitiesByState(){
+		$cities = array();
+		$sql = "select cities.id, cities.name, states.name as state from states join cities on states.id=cities.state_id where  cities.status = 1";
+		$cities = $this -> getResult($sql);
+		return $cities;
+	}
+
+	public function saveRecruiterProfile($profile = array()){
+		$id = null;
+		$sql = "insert into recruiter_details (id, userid, account_type, company, contact_person, mobile, designation, city, company_size, requirements) VALUES ('', ".$_SESSION['userid'].",'".$this->escapeString($profile['account_type'])."','".$this->escapeString($profile['company'])."','".$this->escapeString($profile['contact_person'])."','".$this->escapeString($profile['mobile'])."','".$this->escapeString($profile['designation'])."','".$this->escapeString($profile['city'])."','".$this->escapeString($profile['employees_count'])."','".$this->escapeString($profile['requirements'])."')";
+		$id = $this -> getResult($sql);
+		return $id;
+	}
+
+	public function saveInstituteProfile($profile = array()){
+		$id = null;
+		$sql = "insert into recruiter_details (id, userid, account_type, institute, contact_person, mobile, designation, city, requirements) VALUES ('', ".$_SESSION['userid'].",'".$this->escapeString($profile['account_type'])."','".$this->escapeString($profile['institute'])."','".$this->escapeString($profile['contact_person'])."','".$this->escapeString($profile['mobile'])."','".$this->escapeString($profile['designation'])."','".$this->escapeString($profile['city'])."','".$this->escapeString($profile['requirements'])."')";
+		$id = $this -> getResult($sql);
+		return $id;
+	}
 }
 ?>

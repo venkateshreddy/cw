@@ -28,4 +28,16 @@ function addUserToSession($user_id = 0){
 	session_start();
 	$_SESSION['userid'] = $user_id;
 }
+
+//get cities by state
+function getCitiesbyState($obj){
+	$cities_list = $obj->getCitiesByState();
+	$cities = array();
+	foreach($cities_list as $key=>$val){
+		$state = $val['state'];
+		unset($val['state']);
+		$cities[$state][] = $val;
+	}
+	return $cities;
+}
 ?>
