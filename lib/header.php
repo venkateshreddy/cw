@@ -67,7 +67,7 @@ div.popup p a {
   </div>
   <div class="clearfix"></div>
 </div>
-<div id="sidr"> 
+<div id="sidr" style="display:none;"> 
   <!--<a id="menu-toggle" class="button dark" href="#"><i class="icon-reorder"></i></a>-->
   <h2>Pages</h2>
   <ul>
@@ -173,7 +173,7 @@ div.popup p a {
     <!-- Logo -->
     <div class="grid_2"><a href="index.php"><img src="images/logo.png" alt="Campus Wave"/></a></div>
     <div class="grid_7">
-      <nav id="navigation">
+      <nav id="navigation" style="display:none;">
         <ul id="main-menu">
           <li><a href="index.php" class="active">Home</a></li>
           <li><a href="learning-center.php" target="_blank" class="">Services</a>
@@ -244,7 +244,7 @@ div.popup p a {
   <div class="grid_2">
     <h4 class="fword">Latest News</h4>
   </div>
-  <div class="grid_7">
+  <div class="grid_7" id="latestnews" style="display:none;">
     <div class="newsticker">
       <ul class="slides">
         <li>
@@ -268,3 +268,10 @@ div.popup p a {
   </div>
 </div>
 <div class="clearfix"></div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#navigation").show();
+    $("#sidr").show();
+    $("#latestnews").show();
+  });
+</script>
