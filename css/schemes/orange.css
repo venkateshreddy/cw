@@ -1,0 +1,86 @@
+a{
+	color:#078cad;
+}
+.mainclr, .totalrating{background:#078cad!important;}
+.thumcont:after, .posthumb:after, .flexslider .capcontain .slidetitle .slidecat, .loopBigIsi{
+	background:none;
+}
+.fwstyle{
+	color:#078cad
+}
+.textdev div{
+	background:#078cad;
+}
+.textdev h3, .textdev h1, .textdev h2, .textdev h4{
+	border-right:2px solid #078cad;
+	border-left:2px solid #078cad;
+}
+.parentcontainer{
+	border-top:7px solid #078cad;
+}
+.hdrbtn ul li a:before{
+	background:#078cad;
+}
+.mainmenu{
+	border-bottom:3px solid #078cad;
+}
+/* Animate Material */
+.mainmenu > li > a:after, .hdrbtn:after, .mainmenu li a.active,.mainmenu ul a:before{
+	/*background: #078cad;*/
+}
+.mainmenu ul li:hover > a{color:#078cad}
+.flex-direction-nav i:hover{
+	/*border: 1px solid #078cad;*/
+	color: #078cad;
+}
+.postloop header:hover a{
+	color:#078cad;
+}
+
+.postloop header:hover .postdate{
+	background:#078cad
+}
+.pagination li a:hover, .pagination li a.active{
+	background:#078cad;
+}
+.post h2.title-entry a:hover, .post .inline-list a:hover{
+	color:#078cad;
+}
+
+.post h2.title-entry:active a{
+	background:#078cad;
+}
+.copyright ul li a:before{
+	/*background:#078cad;*/
+}
+
+.recposts:hover h2 a{
+	color:#078cad
+}
+
+.rating{color:#078cad}
+
+.gridpost h2 a:before{
+	background:#078cad;
+}
+.gridpost h2 a:hover{
+	color:#078cad
+}
+.posmeta i, .posmeta a:hover{
+	color:#078cad;
+}
+.gridpost.ajaxloop a:hover small{
+	color:#078cad
+}
+input[type="text"], input[type="email"], input[type="password"], textarea{
+	outline-color:#078cad;
+}
+.content-tags a{
+	background:#078cad;	
+}
+.content-tags a:before{
+	background:#078cad;
+}
+.overall{
+	background:#078cad;
+}
