@@ -19,12 +19,39 @@ include 'lib/header.php';
                    </div>
               </div>
             </li>
-            <li> <img src="images/assets/slider2.jpg" alt="image"/>
+            <li> <img src="images/banner/1.jpg" alt="image"/>
               <div class="capcontain">
-                <div class="slidedate">October 29, 2014</div>
                 <div class="slidetitle">
-                  <h2>Lorem Ipsum is simply dummy text </h2>
-                  <a href="#" class="slidecat">Lifestyle</a> <a href="#" class="slidecom">7 Comments</a> </div>
+                  <h2>We Make The Future Corporate Leaders</h2>
+                </div>
+              </div>
+            </li>
+            <li> <img src="images/banner/2.jpg" alt="image"/>
+              <div class="capcontain">
+                <div class="slidetitle">
+                  <h2>We Bridge Your Path to Success</h2>
+                </div>
+              </div>
+            </li>
+            <li> <img src="images/banner/4.jpg" alt="image"/>
+              <div class="capcontain">
+                <div class="slidetitle">
+                  <h2>Place of Unbounded Learning</h2>
+                </div>
+              </div>
+            </li>
+            <li> <img src="images/banner/5.jpg" alt="image"/>
+              <div class="capcontain">
+                <div class="slidetitle">
+                  <h2>We Present You the Technical World</h2>
+                </div>
+              </div>
+            </li>
+            <li> <img src="images/banner/6.jpg" alt="image"/>
+              <div class="capcontain">
+                <div class="slidetitle">
+                  <h2>Technology at Your Fingure Tips</h2>
+                </div>
               </div>
             </li>
           </ul>
