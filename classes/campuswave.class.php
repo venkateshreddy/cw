@@ -126,6 +126,21 @@ class CampusWave{
 		return $result; 
 	}
 
+	public function saveProjects($doc,$qualification,$department,$type,$title){
+		$sql = "insert into projects values ('','$qualification','$dep','$type','$title','$doc',1)";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+	public function getProjects(){
+		$sql = "select * from projects";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+	public function DeleteProject($id){
+		$sql = "delete from projects where id= $id";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
 	public function saveBannerImages($image,$slidedate , $slidetitle,$slidecat,$slidecom)
 	{
 		$sql = "insert into banner_images values ('','$image','$slidedate','$slidetitle','$slidecat','$slidecom',1)";
@@ -191,6 +206,17 @@ class CampusWave{
 
 	public function saveLatestNews($title,$description,$date){
 		$sql = "insert into latestnews values('','$date','$title','$description',1)";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+
+	public function getQualfications(){
+		$sql = "select * from qualifications where parent_id = 0";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+	public function getCourses($id){
+		$sql = "select * from qualifications where parent_id = $id";
 		$result = $this -> getResult($sql);
 		return $result;
 	}
