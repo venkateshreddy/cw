@@ -92,5 +92,107 @@ class CampusWave{
 		$id = $this -> getResult($sql);
 		return $id;
 	}
+
+	public function getStates()
+	{
+		$sql = "select * from states where order by name asc";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+	public function getCities()
+	{
+		$sql = "select * from cities where oredr by name asc";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+
+	public function store_user_details($id,$f_name,$l_name,$mobile,$city,$qualification,$branch,$month,$year,$marks,$inst_location,$inst,$university){
+		$check_user = "select * from student_details where user_id=<?=$id?>";
+		$result = $this -> getResult($check_user);
+		$count = $this -> getRowCount();
+		return $count;
+		exit;
+		if($result == null || $result == "")
+		{
+			$result = "insert into student_details values('','$id','$f_name','$l_name','$mobile','$qualification','$branch','$month','$year','$marks','$marks','$inst',1)";
+			$result = $this -> getResult($result);
+        	return $result;
+		}
+		else{
+			//$result = "update student_details '','$id','f_name','$l_name','$mobile','$qualification','$branch','$month','$year','$marks','$marks','$inst',1)";
+			//$result = $this -> getResult($result);
+        	return 'hii';
+		}
+		return $result; 
+	}
+
+	public function saveBannerImages($image,$slidedate , $slidetitle,$slidecat,$slidecom)
+	{
+		$sql = "insert into banner_images values ('','$image','$slidedate','$slidetitle','$slidecat','$slidecom',1)";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+	public function getBanngerImages()
+	{
+		$sql = "select * from banner_images";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+	public function DeleteImage($id)
+	{
+		$sql = "delete from banner_images where id= $id";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+	public function getTestimonials(){
+		$sql = "select * from testimonials";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+
+	public function saveTestimonials($name,$content){
+		$sql = "insert into testimonials values('','$name','$content',1)";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+
+	public function DeleteTesti($id){
+		$sql = "delete from testimonials where id= $id";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+
+	public function getWhatsHot(){
+		$sql = "select * from whatshot";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+	public function DeleteWhatsHot($id){
+		$sql = "delete from whatshot where id = $id";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+	public function saveWhatsHot($title,$description,$link){
+		$sql = "insert into whatshot values('','$title','$description','$link',1)";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+
+	public function getLatestNews(){
+		$sql = "select * from latestnews";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+	public function DeleteLatestNews($id){
+		$sql = "delete from latestnews where id = $id";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+
+	public function saveLatestNews($title,$description,$date){
+		$sql = "insert into latestnews values('','$date','$title','$description',1)";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
 }
 ?>

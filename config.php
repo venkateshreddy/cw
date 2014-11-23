@@ -40,4 +40,9 @@ function getCitiesbyState($obj){
 	}
 	return $cities;
 }
+// get banner images
+function getBannerImages(){
+	$img = $obj->getBanngerImages();
+	return $img;
+}
 ?>
