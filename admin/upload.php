@@ -1,6 +1,6 @@
 <?php
 require_once('../classes/campuswave.class.php');
-$cw = new CampusWave('app');
+$cw = new CampusWave('admin');
 $target_dir = "banner_images/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;

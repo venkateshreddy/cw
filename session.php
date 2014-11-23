@@ -5,8 +5,8 @@ if(!isset($_SESSION['userid']) || $_SESSION['userid']=="" || !is_numeric($_SESSI
 	if(!isset($is_index))
 		header('location: index.php');
 }
-else{
+/*else{
 	if(isset($is_index))
 		header('location: profile.php');
-}
+}*/
 ?>

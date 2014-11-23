@@ -1,8 +1,9 @@
 <?php
 $is_index = true;
-require_once('session.php');
-require_once('config.php');
 include 'lib/header.php';
+$banners = $cw -> getBanngerImages();
+$testimonials = $cw -> getTestimonials();
+$hotnews = $cw -> getWhatsHot();
 ?>
   <!-- Slider -->
   <section id="maincontent">
@@ -12,48 +13,15 @@ include 'lib/header.php';
         <div class="bigslide flexslider">
           <div class="overlay"></div>
           <ul class="slides">
-            <li> <img src="images/banner/banner1.jpg" alt="image"/>
-              <div class="capcontain">                
-                <div class="slidetitle">
-                  <h2>We Let you to Build the Real World</h2>
-                   </div>
-              </div>
-            </li>
-            <li> <img src="images/banner/1.jpg" alt="image"/>
-              <div class="capcontain">
-                <div class="slidetitle">
-                  <h2>We Make The Future Corporate Leaders</h2>
+            <?php foreach($banners as $key=>$val){ ?>
+              <li><img src="images/banner/<?=$val['image']?>" alt="Banner Image"/>
+                <div class="capcontain">
+                  <div class="slidetitle">
+                    <!-- <h2><?=$val['slidetitle']?></h2> -->
+                  </div>
                 </div>
-              </div>
-            </li>
-            <li> <img src="images/banner/2.jpg" alt="image"/>
-              <div class="capcontain">
-                <div class="slidetitle">
-                  <h2>We Bridge Your Path to Success</h2>
-                </div>
-              </div>
-            </li>
-            <li> <img src="images/banner/4.jpg" alt="image"/>
-              <div class="capcontain">
-                <div class="slidetitle">
-                  <h2>Place of Unbounded Learning</h2>
-                </div>
-              </div>
-            </li>
-            <li> <img src="images/banner/5.jpg" alt="image"/>
-              <div class="capcontain">
-                <div class="slidetitle">
-                  <h2>We Present You the Technical World</h2>
-                </div>
-              </div>
-            </li>
-            <li> <img src="images/banner/6.jpg" alt="image"/>
-              <div class="capcontain">
-                <div class="slidetitle">
-                  <h2>Technology at Your Fingure Tips</h2>
-                </div>
-              </div>
-            </li>
+              </li>
+            <?php } ?>
           </ul>
         </div>
       </div>
@@ -80,18 +48,17 @@ include 'lib/header.php';
       <div class="grid_3">
         <div class="widgetbox darkblue">
           <h4><i class="icon-comments"></i> Testimonials</h4>
-          <article class="comitem">
-            <div class="grid_3">
-              <div class="comthumb"><img src="images/assets/author.jpg" class="circle" alt="image"/></div>
-            </div>
-            <div class="grid_9"> <strong>Venkatesh:</strong> <em>The learning center tutorials are interesting and academically stimulating, and applied to real-world case studies which is extremely useful</em> </div>
-          </article>
-          <article class="comitem">
-            <div class="grid_3">
-              <div class="comthumb"><img src="images/assets/mangdadang.jpg" class="circle" alt="image"/></div>
-            </div>
-            <div class="grid_9"> <strong>Raghu:</strong> <em>Campuswave is one of the best in the country and has wide range of real time learnings and jobs from top companies</em> </div>
-          </article>
+           <?php foreach($testimonials as $key=>$val){ ?> 
+            <article class="comitem">
+              <!-- <div class="grid_3">
+                <div class="comthumb"><img src="images/assets/author.jpg" class="circle" alt="image"/></div>
+              </div> -->
+              <div class="grid_9" style="width: 100%; padding: 0px 10px; text-align: justify;"> 
+                <strong><?=$val['name']?>:</strong> 
+                <em><?=$val['content']?></em> 
+              </div>
+            </article>
+            <?php } ?>
         </div>
       </div>
       <!-- END SIDEBAR RIGHT -->
@@ -115,18 +82,21 @@ include 'lib/header.php';
         <div class="widgetbox orange">
           <h4><i class="icon-fire"></i> What's Hot</h4>
           <ul>
-            <li>Lorem ipsum dolor sit amet, </li>
-            <li>Lorem ipsum dolor sit amet, </li>
-            <li>Lorem ipsum dolor sit amet, </li>
-            <li>Lorem ipsum dolor sit amet, </li>
+            <?php foreach($hotnews as $key=>$val){
+              ?>
+                <li><a href="<?=$val['link']?>" target="blank"><?=$val['title']?></a></li>
+              <?php
+              } ?>
           </ul>
         </div>
-        <div class="widgetbox red">
+       <!--  <div class="widgetbox red">
           <h4> Video</h4>
           <div class="singlePosThumb">
-            <div class="videothumb posthumb"> <img src="images/assets/vow.jpg" alt="CW"/> <a href="http://www.youtube.com/watch?v=v9SWIsY8rzQ" class="vidplay" title="CW" rel="prettyPhoto"> <i class="icon-play-circle icon-3x"></i> </a> </div>
+            <div class="videothumb posthumb"> 
+              <img src="images/assets/vow.jpg" alt="CW"/> 
+                <a href="http://www.youtube.com/watch?v=v9SWIsY8rzQ" class="vidplay" title="CW" rel="prettyPhoto"> <i class="icon-play-circle icon-3x"></i> </a> </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- END SIDEBAR RIGHT -->
       <div class="clearfix"></div>

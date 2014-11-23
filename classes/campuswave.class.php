@@ -40,13 +40,11 @@ class CampusWave{
 	}
 
 	public function isValidUser($email = "", $password = "", $type = ""){
-        $check_user = "select user_id from user_login where email = '".$this->escapeString($email)."' and password = '".md5($this->escapeString($password))."' and type = '".$this->escapeString($type)."'";
+        $check_user = "select user_id, type from user_login where email = '".$this->escapeString($email)."' and password = '".md5($this->escapeString($password))."' and type = '".$this->escapeString($type)."'";
         $id = 0;
         $result = $this -> getResult($check_user, 'one');
         if(count($result)>0 && isset($result['user_id']))
-        	$id = $result['user_id'];
-        if($id > 0)
-        	return $id;
+        	return $result;
         else
         	return false;
 	}
@@ -107,21 +105,11 @@ class CampusWave{
 	}
 
 	public function store_user_details($id,$f_name,$l_name,$mobile,$city,$qualification,$branch,$month,$year,$marks,$inst_location,$inst,$university){
-		$check_user = "select * from student_details where user_id=<?=$id?>";
-		$result = $this -> getResult($check_user);
-		$count = $this -> getRowCount();
-		return $count;
-		exit;
 		if($result == null || $result == "")
 		{
 			$result = "insert into student_details values('','$id','$f_name','$l_name','$mobile','$qualification','$branch','$month','$year','$marks','$marks','$inst',1)";
 			$result = $this -> getResult($result);
         	return $result;
-		}
-		else{
-			//$result = "update student_details '','$id','f_name','$l_name','$mobile','$qualification','$branch','$month','$year','$marks','$marks','$inst',1)";
-			//$result = $this -> getResult($result);
-        	return 'hii';
 		}
 		return $result; 
 	}
@@ -204,8 +192,8 @@ class CampusWave{
 		return $result;
 	}
 
-	public function saveLatestNews($title,$description,$date){
-		$sql = "insert into latestnews values('','$date','$title','$description',1)";
+	public function saveLatestNews($title,$link,$description,$date){
+		$sql = "insert into latestnews values('','$date','$title','$link','$description',1)";
 		$result = $this -> getResult($sql);
 		return $result;
 	}
@@ -219,6 +207,31 @@ class CampusWave{
 		$sql = "select * from qualifications where parent_id = $id";
 		$result = $this -> getResult($sql);
 		return $result;
+	}
+	public function getUserDetails($uid = 0, $type = 1){
+		$tables = array(
+						1 => 'student_details',
+						2 => 'recruiter_details',
+						3 => 'institute_details'
+					);
+		$sql = "select * from ".$tables[$type]." where userid = $uid";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+	public function getUserName($uid = 0, $type = 1){
+		$tables = array(
+						1 => 'student_details',
+						2 => 'recruiter_details',
+						3 => 'institute_details'
+					);
+		$field_name = array(
+						1 => 'fname',
+						2 => 'company',
+						3 => 'institute'
+					);
+		$sql = "select ".$field_name[$type]." as name from ".$tables[$type]." where userid = $uid";
+		$result = $this -> getResult($sql);
+		return current($result);
 	}
 }
 ?>

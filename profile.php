@@ -6,19 +6,30 @@ if(isset($_SESSION['userid'])=="")
 {
   header('Location:index.php');
 }
+else{
+  $is_from_profile = true;
+  if($_SESSION['type']==2){
+    require_once('profile1.php');
+    exit;
+  }
+  else if($_SESSION['type']==3){
+    require_once('profile2.php');
+    exit;
+  }
+}
 $cities = $cw->getCities();
 
 ?>
 
-  <!-- Slider -->
+  <!-- Slider --><!-- 
   <section id="maincontent">
     <div class="container container_12">
       <div class="grid_12" style="height:150px; background:#CCC;"></div>
       <div class="clearfix"></div>
     </div>
     <div class="clearfix"></div>
-    <!-- POST GRID --> 
-  </section>
+    <!-- POST GRID
+  </section> -->
   <div class="clearfix"></div>
   <div class="devide"></div>
   <!-- Content/Teaser -->
@@ -153,11 +164,12 @@ $cities = $cw->getCities();
    </div>
    <div class="form-group grid_6">
       <label for="name" class="grid_12">  *Captcha </label>
-      <div class="grid_6">
-      <input type="text" class="form-control" id="name" 
-         placeholder="Captcha Code"></div>
-        <div class="grid_6"> <input type="text" class="form-control" id="name" 
-         placeholder="Captcha Code"></div>
+      <div class="grid_6" style="width: 30%;margin-top: 1.5%;">
+        <img class="captcha" src="lib/captcha.php" />
+        &nbsp;&nbsp;
+        <img src="images/Refresh.png" class="captcha_refresh" title="Refresh Captcha" style="height:20px;cursor:pointer;" />
+      </div>
+        <div class="grid_6"> <input type="text" required="" class="form-control" name="captcha" placeholder="Captcha Code"></div>
    </div>
    <input type="button" value="Submit" id="profile_update" class="btn btn-default">
    
@@ -197,7 +209,6 @@ include 'lib/footer.php';
           }
           else{
             alert(data.data);
-            //window.location.reload();
           }
         });
       });

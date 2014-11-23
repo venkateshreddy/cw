@@ -28,13 +28,13 @@ $testi = $cw -> getWhatsHot();
 <div class="display-details">
 <table>
 	<tr>
-		<th>Title</th><th>Description</th><th>Delete</th>
+		<th>Title</th><th>Link</th><th>Description</th><th>Delete</th>
 	</tr>
 	<?php 
 	foreach ($testi as $key => $value) {
 	?>
 	<tr>
-		<td><?=$value['title']?></td><td><?=$value['description']?></td><td><input type="button" value="Delete" onclick="deletetesti(<?=$value['id']?>)"></td>
+		<td><?=$value['title']?></td><td><?=$value['description']?></td><td><?=$value['link']?></td><td><input type="button" value="Delete" onclick="deletetesti(<?=$value['id']?>)"></td>
 	</tr>
 	<?php
 	}

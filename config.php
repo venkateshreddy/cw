@@ -7,7 +7,11 @@ $cw = new CampusWave('app');
 
 //config variables
 define('REGISTRATION_SUCCESS_MESSAGE', "Registration Successful. Please check your mail and click on verification link");
-
+$roles = array(
+			1 => 'Student',
+			2 => 'Recruiter',
+			3 => 'Institute'
+			);
 //error function
 function errorJson($message = ""){
 	return json_encode(array('status'=>0, 'error'=>$message));
@@ -24,9 +28,10 @@ function send_normal_mail($to="", $subject="", $message=""){
 }
 
 //add user to session
-function addUserToSession($user_id = 0){
+function addUserToSession($user_id = 0, $type=1){
 	session_start();
 	$_SESSION['userid'] = $user_id;
+	$_SESSION['type'] = $type;
 }
 
 //get cities by state

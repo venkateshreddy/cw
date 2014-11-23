@@ -4,13 +4,13 @@ class DBConfig{
 						'app' => array(
 								'host' => 'localhost',
 								'user' => 'root',
-								'password' => '',
+								'password' => 'venky',
 								'dbname' => 'campuswave'
 							),
 						'admin' => array(
 								'host' => 'localhost',
 								'user' => 'root',
-								'password' => '',
+								'password' => 'venky',
 								'dbname' => 'campuswave'
 							)
 					);

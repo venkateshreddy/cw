@@ -20,8 +20,8 @@ $testi = $cw -> getLatestNews();
 
 <table align="center">
 <form action="add_latests_news.php" method="post" enctype="multipart/form-data">
-   
     <tr><td>Title</td><td><input type="text" class="field-long" name="title" id="title"></td></tr>
+    <tr><td>Link</td><td><input type="text" class="field-long" name="link" id="link"></td></tr>
     <tr><td>Description</td><td><textarea name="description" id="description" class="field-long field-textarea"></textarea></td></tr>
     <tr><td>date</td><td><input type="text" name="date" id="date"></td></tr>
     <tr><td></td><td><input type="submit" value="Submit" name="submit"></td></tr>
@@ -32,13 +32,13 @@ $testi = $cw -> getLatestNews();
 <div class="display-details">
 <table>
 	<tr>
-		<th>Title</th><th>Description</th><th>date</th><th>Delete</th>
+		<th>Title</th><th>Link</th><th>Description</th><th>date</th><th>Delete</th>
 	</tr>
 	<?php 
 	foreach ($testi as $key => $value) {
 	?>
 	<tr>
-		<td><?=$value['title']?></td><td><?=$value['description']?></td><td><?=$value['date']?></td>
+		<td><?=$value['title']?></td><td><?=$value['link']?></td><td><?=$value['description']?></td><td><?=$value['date']?></td>
 		<td><input type="button" value="Delete" onclick="deletetesti(<?=$value['id']?>)"></td>
 	</tr>
 	<?php

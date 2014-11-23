@@ -8,15 +8,15 @@ if(count($_POST)>0 && isset($_POST['email']) && isset($_POST['password']) && iss
 		echo errorJson("Error :: Invalid Email");
 		exit; 
 	}
-
-	if(!$id = $cw->isValidUser($email, $password, $type)){
-		echo errorJson("Error :: Invalid Credentials");
+	$user_details = array();
+	if($basic_details = $cw->isValidUser($email, $password, $type)){
+		addUserToSession($basic_details['user_id'], $basic_details['type']);
+		echo successJson("success");
 		exit;
 	}
-
-	if(isset($id)){
-		addUserToSession($id);
-		echo successJson("success");
+	else{
+		echo errorJson("Error :: Invalid Credentials");
+		exit;
 	}
 }
 else{

@@ -1,3 +1,15 @@
+<?php
+require_once('session.php');
+require_once('config.php');
+if(isset($_SESSION) && isset($_SESSION['userid'])){
+  if(!isset($_SESSION['name']) || $_SESSION['name']!="")
+  { 
+    $user_details = $cw->getUserName($_SESSION['userid'], $_SESSION['type']);
+    $_SESSION['name'] = $user_details['name'];
+  }
+}
+$latest_news = $cw->getLatestNews();
+?>
 <!doctype html>
 <html>
 <head>
@@ -224,17 +236,30 @@ div.popup p a {
         </ul>
       </nav>
     </div>
-    <div class="grid_3 text-right">
-      <ul class="login">
-        <li> <a href="#" data-toggle="modal" data-target="#myModalsignup">Signup</a> &nbsp;&nbsp;| </li>
-        <li> <a href="#" data-toggle="modal" data-target="#myModallogin">Login</a> </li>
-      </ul>
-      <div class="topmenu">
-        <div class="hdrbtn"><img src="images/facebook.png" alt="Face Book"/></div>
-        <div class="hdrbtn"><img src="images/google.png" alt="Google"/></div>
-        <div class="hdrbtn"><img src="images/in.png" alt="In"/></div>
+      <div class="grid_3 text-right">
+        <?php
+         if(!isset($_SESSION) || !isset($_SESSION['userid']) || $_SESSION['userid']==""){
+        ?>
+          <ul class="login">
+            <li> <a href="#" data-toggle="modal" data-target="#myModalsignup">Signup</a> &nbsp;&nbsp;| </li>
+            <li> <a href="#" data-toggle="modal" data-target="#myModallogin">Login</a> </li>
+          </ul>
+          <div class="topmenu">
+            <div class="hdrbtn"><img src="images/facebook.png" alt="Face Book"/></div>
+            <div class="hdrbtn"><img src="images/google.png" alt="Google"/></div>
+            <div class="hdrbtn"><img src="images/in.png" alt="In"/></div>
+          </div>
+      <?php
+        }
+      else{ ?>
+        <ul class="login">
+            <li><strong>Welcome</strong></li>
+            <li title="View Profile"><a href="profile.php"><strong><?=$_SESSION['name']?></strong></a></li>
+            <li><a href="logout.php">logout</a></li>
+          </ul>
+     <?php }
+    ?>
       </div>
-    </div>
   </div>
   <div class="clearfix"></div>
 </header>
@@ -247,18 +272,14 @@ div.popup p a {
   <div class="grid_7" id="latestnews" style="display:none;">
     <div class="newsticker">
       <ul class="slides">
-        <li>
-          <h2><a href="#">Lorem Ipsum is simply dummy text of the printing.</a> | on Sunday 23 October</h2>
-        </li>
-        <li>
-          <h2><a href="#">Lorem Ipsum is simply dummy text of the printing.</a> | on Sunday 23 October</h2>
-        </li>
-        <li>
-          <h2><a href="#">Lorem Ipsum is simply dummy text of the printing.</a> | on Sunday 23 October</h2>
-        </li>
-        <li>
-          <h2><a href="#">Lorem Ipsum is simply dummy text of the printing.</a> | on Sunday 23 October</h2>
-        </li>
+        <?php foreach ($latest_news as $key => $value) {
+          ?>
+          <li>
+            <h2><a href="<?=$value['link']?>" target="blank"><?=$value['title']?></a> | <?=$value['date']?></h2>
+          </li>
+          <?php
+        }
+        ?>
       </ul>
     </div>
   </div>

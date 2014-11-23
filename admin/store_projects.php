@@ -1,6 +1,6 @@
 <?php
 require_once('../classes/campuswave.class.php');
-$cw = new CampusWave('app');
+$cw = new CampusWave('admin');
 
 $target_dir = "projects/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);

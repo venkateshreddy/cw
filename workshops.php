@@ -2,14 +2,14 @@
 include 'lib/header.php';
 ?>
   <!-- Slider -->
-  <section id="maincontent">
+<!--   <section id="maincontent">
     <div class="container container_12">
       <div class="grid_12" style="height:150px; background:#CCC;"></div>
       <div class="clearfix"></div>
     </div>
     <div class="clearfix"></div>
-    <!-- POST GRID --> 
-  </section>
+    <!-- POST GRID 
+  </section> -->
   <div class="clearfix"></div>
   <div class="devide"></div>
   <!-- Content/Teaser -->
