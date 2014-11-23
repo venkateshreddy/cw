@@ -19,12 +19,39 @@ include 'lib/header.php';
                    </div>
               </div>
             </li>
-            <li> <img src="images/assets/slider2.jpg" alt="image"/>
+            <li> <img src="images/banner/1.jpg" alt="image"/>
               <div class="capcontain">
-                <div class="slidedate">October 29, 2014</div>
                 <div class="slidetitle">
-                  <h2>Lorem Ipsum is simply dummy text </h2>
-                  <a href="#" class="slidecat">Lifestyle</a> <a href="#" class="slidecom">7 Comments</a> </div>
+                  <h2>We Make The Future Corporate Leaders</h2>
+                </div>
+              </div>
+            </li>
+            <li> <img src="images/banner/2.jpg" alt="image"/>
+              <div class="capcontain">
+                <div class="slidetitle">
+                  <h2>We Bridge Your Path to Success</h2>
+                </div>
+              </div>
+            </li>
+            <li> <img src="images/banner/4.jpg" alt="image"/>
+              <div class="capcontain">
+                <div class="slidetitle">
+                  <h2>Place of Unbounded Learning</h2>
+                </div>
+              </div>
+            </li>
+            <li> <img src="images/banner/5.jpg" alt="image"/>
+              <div class="capcontain">
+                <div class="slidetitle">
+                  <h2>We Present You the Technical World</h2>
+                </div>
+              </div>
+            </li>
+            <li> <img src="images/banner/6.jpg" alt="image"/>
+              <div class="capcontain">
+                <div class="slidetitle">
+                  <h2>Technology at Your Fingure Tips</h2>
+                </div>
               </div>
             </li>
           </ul>
@@ -57,13 +84,13 @@ include 'lib/header.php';
             <div class="grid_3">
               <div class="comthumb"><img src="images/assets/author.jpg" class="circle" alt="image"/></div>
             </div>
-            <div class="grid_9"> <strong>Hinata:</strong> <em>Integer eget tortor et elit venenatis auctor morbi turpis nulla Lorem Ipsum is simply dummy text of the printing</em> </div>
+            <div class="grid_9"> <strong>Venkatesh:</strong> <em>The learning center tutorials are interesting and academically stimulating, and applied to real-world case studies which is extremely useful</em> </div>
           </article>
           <article class="comitem">
             <div class="grid_3">
               <div class="comthumb"><img src="images/assets/mangdadang.jpg" class="circle" alt="image"/></div>
             </div>
-            <div class="grid_9"> <strong>Chris:</strong> <em>Integer eget tortor et elit venenatis auctor morbi turpis nulla Lorem Ipsum is simply dummy text of the printing</em> </div>
+            <div class="grid_9"> <strong>Raghu:</strong> <em>Campuswave is one of the best in the country and has wide range of real time learnings and jobs from top companies</em> </div>
           </article>
         </div>
       </div>
