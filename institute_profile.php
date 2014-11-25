@@ -1,4 +1,6 @@
 <?php
+$is_ajax = true;
+require_once('session.php');
 require_once('config.php');
 
 header('content-type: text/json');

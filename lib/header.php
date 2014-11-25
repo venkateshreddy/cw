@@ -1,8 +1,7 @@
 <?php
-require_once('session.php');
 require_once('config.php');
 if(isset($_SESSION) && isset($_SESSION['userid'])){
-  if(!isset($_SESSION['name']) || $_SESSION['name']!="")
+  if(!isset($_SESSION['name']) || $_SESSION['name']=="")
   { 
     $user_details = $cw->getUserName($_SESSION['userid'], $_SESSION['type']);
     $_SESSION['name'] = $user_details['name'];
@@ -191,8 +190,8 @@ div.popup p a {
           <li><a href="learning-center.php" target="_blank" class="">Services</a>
             <ul class="sub-menu">
               <li><a href="learning-center.php" target="_blank">Learning Center</a></li>
-              <li><a href="acedmic-project.php">Acedmic Projects</a>
-                <ul class="sub-menu">
+              <li><a href="projects.php">Acedmic Projects</a>
+                <!-- <ul class="sub-menu">
                   <li><a href="#">B.E / B.Tech</a>
                     <ul class="sub-menu">
                       <li><a href="#">Mini Project</a>
@@ -218,7 +217,7 @@ div.popup p a {
                       <li><a href="mbece.php">ECE</a></li>
                     </ul>
                   </li>
-                </ul>
+                </ul> -->
               </li>
               <li><a href="training-mentoring.php">Training & Mentoring</a></li>
               <li><a href="recruitment.php">Recruitment</a></li>

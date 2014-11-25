@@ -24,7 +24,7 @@
             alert(data.error);
           }
           else{
-            window.location = 'profile.php';
+            window.location.reload();
           }
         }); 
       }

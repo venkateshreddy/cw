@@ -1,5 +1,6 @@
 <?php
 $is_index = true;
+include 'session.php';
 include 'lib/header.php';
 $banners = $cw -> getBanngerImages();
 $testimonials = $cw -> getTestimonials();

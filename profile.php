@@ -1,6 +1,5 @@
 <?php
 require_once('session.php');
-require_once('config.php');
 include 'lib/header.php';
 if(isset($_SESSION['userid'])=="")
 {
@@ -18,7 +17,9 @@ else{
   }
 }
 $cities = $cw->getCities();
-
+$qualifications = $cw->getActiveQualifications();
+$cities = getCitiesbyState($cw);
+$universities = $cw->getUniversities();
 ?>
 
   <!-- Slider --><!-- 
@@ -53,50 +54,32 @@ $cities = $cw->getCities();
       <form role="form" class="details_form">
    <div class="form-group grid_6">
       <label for="name"> *First Name</label>
-      <input type="text" class="form-control" name="f_name" id="f_name" 
+      <input type="text" class="form-control" required="" name="f_name" id="f_name" 
          placeholder="Enter Name">
    </div>
    <div class="form-group grid_6">
       <label for="name"> *Last Name</label>
-      <input type="text" class="form-control" name="l_name" id="l_name" 
+      <input type="text" class="form-control" required="" name="l_name" id="l_name" 
          placeholder="Enter Name">
    </div> 
-   <!-- <div class="form-group grid_6">
-      <label for="name"> *Email</label>
-      <input type="text" class="form-control" id="name" 
-         placeholder="Enter Email">
-   </div>
-   <div class="form-group grid_6">
-      <label for="name"> *Repeat Email</label>
-      <input type="text" class="form-control" id="name" 
-         placeholder="Enter Repeat Email">
-   </div>
-   <div class="form-group grid_6">
-      <label for="name"> *Password</label>
-      <input type="password" class="form-control" id="name" 
-         placeholder="Enter Password">
-   </div>
-   <div class="form-group grid_6">
-      <label for="name"> *Repeat Password</label>
-      <input type="password" class="form-control" id="name" 
-         placeholder="Enter Repeat Password">
-   </div> -->
    <div class="form-group grid_6">
       <label for="name"> *Mobile</label>
-      <input type="text" class="form-control" name="mobile" id="mobile" 
+      <input type="number" class="form-control" required="" name="mobile" id="mobile" 
          placeholder="Enter Mobile">
    </div>
    <div class="form-group grid_6">
       <label for="name"> *Current City</label>
-      <select class="form-control" name="city" id="city">
+      <select class="form-control" required="" name="city" id="city">
                <option>Select City</option>
-               <?php foreach ($cities as $key => $value) {
-                
-               ?>
-                <option value="<?=$value['id']?>"><?=$value['name']?></option>
                 <?php
-              }
-              ?>
+        foreach($cities as $state=>$cities_arr){
+          echo "<optgroup label='".$state."'>";
+            foreach($cities_arr as $k=>$city_arr){
+              echo "<option value='".$city_arr['id']."'>".$city_arr['name']."</option>";
+            }
+          echo "</optgroup>";
+        }
+        ?>      
             </select>
    </div>
    <div class="clearfix"></div>
@@ -104,36 +87,57 @@ $cities = $cw->getCities();
    <div class="clearfix"></div>
    <div class="form-group grid_6">
       <label for="name"> *Highest Qualification Details</label>
-      <select class="form-control" name="qualification" id="qualification">
-               <option>Select City</option>
-                <option>M.Tech</option>
+      <select class="form-control" required="" name="qualification" id="qualification">
+               <option value="">Select</option>
+               <?php foreach($qualifications as $key=>$val){ ?>
+                  <option value="<?=$val['qid']?>"><?=$val['qname']?></option>
+               <?php } ?>
             </select>
    </div>
    <div class="form-group grid_6">
       <label for="name"> *Branch</label>
-      <select class="form-control" name="branch" id="branch">
-               <option>Select Branch</option>
-                <option>M.Tech</option>
+      <select class="form-control" required="" name="branch" id="branch">
+               <option>Select</option>
             </select>
    </div>
    <div class="form-group grid_3">
       <label for="name"> *Pass Out Month</label>
-      <select class="form-control" name="month" id="month">
-               <option>Select Month</option>
-                <option>Pass Out Month</option>
+      <select class="form-control" required="" name="month" id="month">
+               <option value="">Select Month</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
             </select>
    </div>
    <div class="form-group grid_3">
       <label for="name"> *Pass Out Year</label>
-      <select class="form-control" name="year" id="year">
-               <option>Select City</option>
-                <option>Pass Out Year</option>
+      <select class="form-control" required="" name="year" id="year">
+               <option value="">Select Year</option>
+                <option value="2007">2007</option>
+                <option value="2008">2008</option>
+                <option value="2009">2009</option>
+                <option value="2010">2010</option>
+                <option value="2011">2011</option>
+                <option value="2012">2012</option>
+                <option value="2013">2013</option>
+                <option value="2014">2014</option>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
             </select>
    </div>
    <div class="form-group grid_6">
       <label class="grid_12" for="name"> *Marks</label>
       <div class="grid_5"><label>
-      <input style="margin-top:0px;" type="radio" id="markss" value="Percentage" name="markss"> Percentage 
+      <input style="margin-top:0px;" checked="checked" type="radio" id="markss" value="Percentage" name="markss"> Percentage 
       </label></div>
       <div class="grid_5"><label>
       <input type="radio" style="margin-top:0px;" id="marks1" value="CGPA" name="markss"> CGPA(out of 10)
@@ -141,26 +145,36 @@ $cities = $cw->getCities();
       <div class="grid_2"> <input type="text" class="form-control" id="marks" name="marks"></div>
    </div>
    
-   <div class="form-group grid_6">
+   <!-- <div class="form-group grid_6">
       <label for="name">  *Your College Details </label>
       <select class="form-control" name="inst_location" id="inst_location">
                <option>Institute Location</option>
-                <option>Andhra Pradesh</option>
+            <?php
+            foreach($cities as $state=>$cities_arr){
+              echo "<optgroup label='".$state."'>";
+                foreach($cities_arr as $k=>$city_arr){
+                  echo "<option value='".$city_arr['id']."'>".$city_arr['name']."</option>";
+                }
+              echo "</optgroup>";
+            }
+            ?>  
+      </select>
+   </div> -->
+   <div class="form-group grid_6">
+      <label for="name">  *Select University </label>
+      <select class="form-control" name="university" id="university">
+               <option value="">Select University</option>
+               <option value="0">Deemed University</option>
+               <?php foreach($universities as $key=>$val){ ?>
+                <option value="<?=$val['id']?>"><?=$val['name']?>, <?=$val['location']?></option>
+               <?php } ?> 
             </select>
    </div>
    <div class="form-group grid_6">
       <label for="name">  *Select Institute </label>
       <select class="form-control" name="inst" id="inst">
-               <option>Select Institute</option>
-                <option>SMU</option>
-            </select>
-   </div>
-   <div class="form-group grid_6">
-      <label for="name">  *Select University </label>
-      <select class="form-control" name="university" id="university">
-               <option>Select University</option>
-                <option>SMU</option>
-            </select>
+        <option>Select Institute</option>
+      </select>
    </div>
    <div class="form-group grid_6">
       <label for="name" class="grid_12">  *Captcha </label>
@@ -171,7 +185,8 @@ $cities = $cw->getCities();
       </div>
         <div class="grid_6"> <input type="text" required="" class="form-control" name="captcha" placeholder="Captcha Code"></div>
    </div>
-   <input type="button" value="Submit" id="profile_update" class="btn btn-default">
+   <div style="clear:both"></div>
+   <div class="form-group grid_6"><input type="submit" value="Submit" class="btn btn-default"></div>
    
 
 </form>
@@ -199,17 +214,72 @@ $cities = $cw->getCities();
 include 'lib/footer.php';
 ?>
 <script>
-  $('#profile_update').click(function(){
-      
-      var str = $('.details_form').serialize();
-      
-        $.post('user_profile_update.php',str,function(data){
-          if(data.status != 1){
-            alert(data.error);
-          }
-          else{
-            alert(data.data);
-          }
-        });
+  $(document).ready(function(){
+      $('.details_form').submit(function(event){
+        
+        var str = $('.details_form').serialize();
+        
+          $.post('user_profile_update.php',str,function(data){
+            if(data.status != 1){
+              alert(data.error);
+            }
+            else{
+              alert(data.data);
+            }
+          });
+          event.preventDefault();
       });
+      $("#qualification").change(function(){
+        var id = $(this).val();
+        if(id == ""){
+          alert("you must select the qualification");
+        }
+        else{
+          $.post("getGroups.php",{id:id},function(data){
+            if(data.status==0){
+              alert(data.error);
+            }
+            else{
+              $("#branch").html("<option value=''>Select</option>");
+              if(data.data.length == 0){
+                str = "<option value='0'>No Branch</option>";
+                $("#branch").append(str);
+              }
+              else{
+                for(i=0; i<data.data.length;i++){
+                  str = "<option value='"+data.data[i].qid+"'>"+data.data[i].qname+"</option>";
+                  $("#branch").append(str);   
+                }
+              }
+            }
+          });
+        }
+      });
+      $("#university").change(function(){
+        var id = $(this).val();
+        if(id == ""){
+          alert("you must select the university");
+        }
+        else{
+          $.post("getColleges.php",{id:id},function(data){
+            if(data.status==0){
+              alert(data.error);
+            }
+            else{
+              $("#inst").html("<option value=''>Select</option>");
+              if(data.data.length == 0){
+                str = "<option value='0'>College Not Found</option>";
+                $("#inst").append(str);
+              }
+              else{
+                for(i=0; i<data.data.length;i++){
+                  str = "<option value='"+data.data[i].id+"'>"+data.data[i].name+", "+data.data[i].location+"</option>";
+                  $("#inst").append(str);   
+                }
+              }
+            }
+          });
+        }
+      });
+  })
 </script>

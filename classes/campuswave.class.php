@@ -56,11 +56,28 @@ class CampusWave{
         return $id;
 	}
 
-	public function getActiveQualifications(){
+	public function getActiveQualifications($parent_id = 0){
 		$qualifications = array();
-		$sql = "select qid, qname from qualifications where parent_id = 0 and status = 1";
+		$sql = "select qid, qname from qualifications where parent_id = $parent_id and status = 1";
 		$qualifications = $this -> getResult($sql);
 		return $qualifications;
+	}
+
+	public function getUniversities(){
+		$universities = array();
+		$sql = "select id, name, location from universities where status = 1";
+		$universities = $this -> getResult($sql);
+		return $universities;
+	}
+
+	public function getColleges($uid = null){
+		$colleges = array();
+		$sql = "select id, name, location from colleges where status = 1";
+		if(!is_null($uid)){
+			$sql .= " and university_id=".$uid;
+		}
+		$colleges = $this -> getResult($sql);
+		return $colleges;
 	}
 
 	public function getRoles($type = 1){
@@ -104,14 +121,10 @@ class CampusWave{
 		return $result;
 	}
 
-	public function store_user_details($id,$f_name,$l_name,$mobile,$city,$qualification,$branch,$month,$year,$marks,$inst_location,$inst,$university){
-		if($result == null || $result == "")
-		{
-			$result = "insert into student_details values('','$id','$f_name','$l_name','$mobile','$qualification','$branch','$month','$year','$marks','$marks','$inst',1)";
-			$result = $this -> getResult($result);
-        	return $result;
-		}
-		return $result; 
+	public function store_user_details($id,$f_name,$l_name,$mobile, $city, $qualification,$branch,$month,$year, $markss,$marks,$inst){
+		$result = "insert into student_details values('','$id','$f_name','$l_name','$mobile', '$city', '$qualification','$branch','$month','$year','$markss','$marks','$inst',1)";
+		$result = $this -> getResult($result);
+    	return $result; 
 	}
 
 	public function saveProjects($doc,$qualification,$department,$type,$title){
