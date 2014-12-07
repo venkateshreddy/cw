@@ -1,29 +1,33 @@
 <?php
+error_reporting(0);
+require_once('../classes/campuswave.class.php');
+$admin = new CampusWave();
+$admin->authenticate();
+
 require_once('../config.php');
 $projects = $cw -> getProjects();
 $qual = $cw -> getQualfications();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Add Projects</title>
-	<script type="text/javascript" src="../js/jquery-2.0.3.min.js"></script> 
-	<link type="text/css" rel="stylesheet"  href="admin_style.css"  />
-
+   <title>home</title>
+   <?php include('includefiles.php'); ?>
+   <link type="text/css" rel="stylesheet"  href="admin_style.css"  />
 </head>
-<body>
-<div class="main">
-<div class="links">
-	<a href="dashboard.php">Back to Dashboard</a>
-</div>
 
+<body>
+
+    <div id="wrapper">
+        <?php include('header.php'); ?>
+        <div id="page-wrapper">
 <div class="header form-style-1">
 
 <table align="center">
 <form action="store_projects.php" method="post" enctype="multipart/form-data">
    
     <tr><td>Qualification</td><td>
-    <select name="qualfication" class="field-select" onchange="ShowCourse(this.value)">
+    <select name="qualfication" class="field-select" id="qualifid">
     	<option value="">Select Qualfication</option>
     	<?php
     	foreach ($qual as $key => $value) {
@@ -69,8 +73,8 @@ $qual = $cw -> getQualfications();
 	?>
 	<tr>
 		<!-- <td><?=$value['qualification']?></td><td><?=$value['description']?></td><td><?=$value['date']?></td> -->
-		<td><?=$value['title']?></td><td><a href="projects/<?=$value['name']?>">Click</a></td>
-		<td><input type="button" value="Delete" onclick="deletetesti(<?=$value['id']?>)"></td>
+		<td><?=$value['title']?></td><td><a href="projects/<?=$value['project_file_path']?>">Click</a></td>
+		<td><input type="button" value="Delete" onClick="deletetesti(<?=$value['pid']?>)"></td>
 	</tr>
 	<?php
 	}
@@ -78,6 +82,24 @@ $qual = $cw -> getQualfications();
 </table>
 </div>
 </div>
+<!-- /#page-wrapper -->
+
+    </div>
+	</div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/sb-admin-2.js"></script>
+
 <script type="text/javascript">
 	function deletetesti(id){
 		var con = confirm("Are you sure you want to Delete this..?");
@@ -97,19 +119,33 @@ $qual = $cw -> getQualfications();
 			return false;
 		}
 	}
+    $("#qualifid").change(function(){ 
+        var id = $(this).val(); //alert(id);
+        if(id == ""){
+          alert("you must select the qualification");
+        }
+        else{
+          $.post("get_courses.php",{id:id},function(data){ //alert(data);
+            if(data.status==0){
+              alert(data.error);
+            }
+            else{
+              $("#courses").html("<option value=''>Select</option>");
+              if(data.data.length == 0){
+                str = "<option value='0'>Course Not Found</option>";
+                $("#courses").append(str);
+              }
+              else{
+                for(i=0; i<data.data.length;i++){
+                  str = "<option value='"+data.data[i].qid+"'>"+data.data[i].qname+"</option>";
+                  $("#courses").append(str);   
+                }
+              }
+            }
+          });
+        }
+      });
 
-	function ShowCourse(id){
-		$.post('get_courses.php',
-			{
-				id : id
-			},
-			function(data){
-	          if(data){
-	           $('#courses').html(data);
-	          }
-	          
-        	});
-	}
 </script>
 </body>
 </html>

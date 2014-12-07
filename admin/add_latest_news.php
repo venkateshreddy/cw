@@ -1,21 +1,25 @@
 <?php
+error_reporting(0);
+require_once('../classes/campuswave.class.php');
+$admin = new CampusWave();
+$admin->authenticate();
+
 require_once('../config.php');
 $testi = $cw -> getLatestNews();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Latest News</title>
-	<script type="text/javascript" src="../js/jquery-2.0.3.min.js"></script> 
-	<link type="text/css" rel="stylesheet"  href="admin_style.css"  />
-
+   <title>home</title>
+   <?php include('includefiles.php'); ?>
+   <link type="text/css" rel="stylesheet"  href="admin_style.css"  />
 </head>
-<body>
-<div class="main">
-<div class="links">
-	<a href="dashboard.php">Back to Dashboard</a>
-</div>
 
+<body>
+
+    <div id="wrapper">
+        <?php include('header.php'); ?>
+        <div id="page-wrapper">
 <div class="header form-style-1">
 
 <table align="center">
@@ -39,7 +43,7 @@ $testi = $cw -> getLatestNews();
 	?>
 	<tr>
 		<td><?=$value['title']?></td><td><?=$value['link']?></td><td><?=$value['description']?></td><td><?=$value['date']?></td>
-		<td><input type="button" value="Delete" onclick="deletetesti(<?=$value['id']?>)"></td>
+		<td><input type="button" value="Delete" onClick="deletetesti(<?=$value['id']?>)"></td>
 	</tr>
 	<?php
 	}
@@ -47,6 +51,24 @@ $testi = $cw -> getLatestNews();
 </table>
 </div>
 </div>
+<!-- /#page-wrapper -->
+
+    </div>
+	</div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/sb-admin-2.js"></script>
+
 <script type="text/javascript">
 	function deletetesti(id){
 		var con = confirm("Are you sure you want to Delete this..?");

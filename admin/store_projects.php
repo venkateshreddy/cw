@@ -10,7 +10,12 @@ $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 if(isset($_POST["submit"])) {
 	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 		extract($_POST);
-		$id = $cw->saveProjects($_FILES["fileToUpload"]["name"],$qualfication,$course,$project_type,$title);
+		$doc=$_FILES["fileToUpload"]["name"];
+		$status='1';
+		//print_r($_POST);
+		//print_r($doc);
+		//exit;
+		$id = $cw->saveProjects($title,$qualfication,$course,$doc,$status);
         
         header('location:add_projects.php?status=success');
     } else {

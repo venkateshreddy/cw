@@ -1,20 +1,25 @@
 <?php
+error_reporting(0);
+require_once('../classes/campuswave.class.php');
+$admin = new CampusWave();
+$admin->authenticate();
+
 require_once('../config.php');
 $testi = $cw -> getTestimonials();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Add Testimonials</title>
-	<script type="text/javascript" src="../js/jquery-2.0.3.min.js"></script>
-	<link type="text/css" rel="stylesheet"  href="admin_style.css"  />
-
+   <title>home</title>
+   <?php include('includefiles.php'); ?>
+   <link type="text/css" rel="stylesheet"  href="admin_style.css"  />
 </head>
+
 <body>
-<div class="main">
-<div class="links">
-	<a href="dashboard.php">Back to Dashboard</a>
-</div>
+
+    <div id="wrapper">
+        <?php include('header.php'); ?>
+        <div id="page-wrapper">
 <div class="header form-style-1">
 <table>
 <form action="add_testi.php" method="post" enctype="multipart/form-data">
@@ -34,13 +39,29 @@ $testi = $cw -> getTestimonials();
 	foreach ($testi as $key => $value) {
 	?>
 	<tr>
-		<td><?=$value['name']?></td><td><?=$value['content']?></td><td><input type="button" value="Delete" onclick="deletetesti(<?=$value['id']?>)"></td>
+		<td><?=$value['name']?></td><td><?=$value['content']?></td><td><input type="button" value="Delete" onClick="deletetesti(<?=$value['id']?>)"></td>
 	</tr>
 	<?php
 	}
 	?>
 </table>
 </div></div>
+ </div>
+	</div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="js/plugins/metisMenu/metisMenu.min.js"></script>
+    <!-- Morris Charts JavaScript -->
+    <script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/sb-admin-2.js"></script>
+
 <script type="text/javascript">
 	function deletetesti(id){
 		var con = confirm("Are you sure you want to Delete this..?");
