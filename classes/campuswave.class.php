@@ -127,8 +127,8 @@ class CampusWave{
     	return $result; 
 	}
 
-	public function saveProjects($doc,$qualification,$department,$type,$title){
-		$sql = "insert into projects values ('','$qualification','$dep','$type','$title','$doc',1)";
+	public function saveProjects($title,$qualification,$course,$doc,$status){
+		$sql = "insert into projects(title, platform, type, project_file_path, status)values('$title','$qualification','$course','$doc','$status')";
 		$result = $this -> getResult($sql);
 		return $result;
 	}
@@ -138,7 +138,7 @@ class CampusWave{
 		return $result;
 	}
 	public function DeleteProject($id){
-		$sql = "delete from projects where id= $id";
+		$sql = "delete from projects where pid=$id";
 		$result = $this -> getResult($sql);
 		return $result;
 	}
@@ -211,6 +211,30 @@ class CampusWave{
 		return $result;
 	}
 
+	public function saveContact($name,$email,$subject1,$mobile,$message,$recipient,$priority){
+		$sql = "insert into contacts_tbl(name,email,subject,mobile,message,recipient,priority)values('$name','$email','$subject1','$mobile','$message','$recipient','$priority')";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+
+	public function getPlatform($id){
+		$sql = "SELECT group_platforms.platformid, platforms.id, platforms.name
+        FROM platforms
+        INNER JOIN group_platforms
+        ON group_platforms.groupid='$id'
+        where platforms.id=group_platforms.platformid";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+    
+
+   public function getProjects1($pid,$typeid){
+		$sql = "SELECT * from projects where platform='$pid' and type='$typeid'";
+		$result = $this -> getResult($sql);
+		return $result;
+	}
+
+
 	public function getQualfications(){
 		$sql = "select * from qualifications where parent_id = 0";
 		$result = $this -> getResult($sql);
@@ -246,5 +270,26 @@ class CampusWave{
 		$result = $this -> getResult($sql);
 		return current($result);
 	}
+
+	public function getAdminByEmailPassword($email,$password){
+		$user = array();
+		$sql_get_user_details = "select * from user_login where email = '".addslashes($email)."' and password = '".md5($password)."'";
+		if($this -> db -> executeQuery($sql_get_user_details))
+		{
+			$user = $this -> db -> getResult();
+			//$_SESSION['admin_login'] = $email;
+		}
+		return $user;
+	}
+	
+	public function authenticate() {
+    session_start();
+	if(!isset($_SESSION['user_id']) || $_SESSION['user_id']==""){
+	  header('location: index.php');
+	}
+	/*if(isset($_SESSION['user_id']) || $_SESSION['user_id']!=""){
+	  header('location: home.php');
+	}*/ 
+  }
 }
 ?>

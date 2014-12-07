@@ -399,11 +399,8 @@
 <!--lightbox login end--> 
 
 <a href="#" class="scrollup"><i class="icon-chevron-up"></i></a>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo9zsQwplP3bgc4mYmC597Lnx616HyhU4&sensor=true"></script> 
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAo9zsQwplP3bgc4mYmC597Lnx616HyhU4&sensor=true"></script>  
 <script type="text/javascript">
-// Google Map Maker script v.4
-// (c) 2014 Richard Stephenson
-// http://mapmaker.donkeymagic.co.uk
 var map
     openInfowindow = null
     newPoints = [];
@@ -445,7 +442,7 @@ function createMarker (marker, i) {
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+</script> -->
 </body>
 </html>
 <!--<ul style="max-width: 300px;" class="nav nav-pills nav-stacked">
